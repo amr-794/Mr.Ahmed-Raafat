@@ -2,7 +2,8 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>النسخة النهائية - البطاقة الأسطورية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr.Ahmed Raafat</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -39,8 +40,8 @@
 
         .card-container {
             position: relative;
-            width: 280px;
-            height: 420px;
+            width: 90%;
+            height: 500px;
             transform-style: preserve-3d;
             perspective: 1000px;
         }
@@ -99,8 +100,8 @@
 
         .profile-wrapper {
             position: relative;
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             margin-top: 20px;
             transform-style: preserve-3d;
             animation: float 4s ease-in-out infinite;
@@ -110,7 +111,7 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: url('Mr_Ahmed_Raafat.png') center/cover; /* قم بتحديد مسار الصورة هنا */
+            background: url('Mr_Ahmed_Raafat.png') center/cover;
             filter: drop-shadow(0 0 20px var(--main-color));
         }
 
@@ -130,7 +131,7 @@
         .name {
             color: #fff;
             margin: 20px 0;
-            font-size: 1.8em;
+            font-size: 1.5em;
             text-transform: uppercase;
             background: linear-gradient(45deg, 
                 var(--main-color), 
@@ -141,16 +142,20 @@
         }
 
         .social-links {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            display: flex;
+            justify-content: center;
             gap: 15px;
             margin-top: auto;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .social-link {
             position: relative;
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -162,7 +167,7 @@
 
         .social-link i {
             color: white;
-            font-size: 1em;
+            font-size: 0.9em;
             transition: all 0.3s ease;
         }
 
@@ -228,24 +233,17 @@
                         <div class="energy-aura"></div>
                         <div class="profile-image"></div>
                     </div>
-                    <h1 class="name">اسمك هنا</h1>
+                    <h1 class="name">Mr.Ahmed Raafat</h1>
                     <div class="social-links">
-                        <!-- فيسبوك -->
                         <a href="https://www.facebook.com/ahmedraafat25?mibextid=ZbWKwL" target="_blank" class="social-link" id="facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <!-- يوتيوب -->
                         <a href="https://youtube.com/@ahmedraafat2024?si=2RkO_tcUUjUfiVXJ" target="_blank" class="social-link" id="youtube">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <!-- واتساب -->
                         <a href="https://wa.me/+201097072770" target="_blank" class="social-link" id="whatsapp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <!-- جيميل -->
-                        
-                        <!-- تيك توك -->
-                         
                     </div>
                 </div>
             </div>
@@ -278,20 +276,15 @@
             card.style.transform += ` translateZ(${scrollY * 0.1}px)`;
         });
 
-        // إضافة تأخير عند النقر على الروابط
         const socialLinks = document.querySelectorAll('.social-link');
         socialLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault(); // منع الانتقال المباشر إلى الرابط
-                const targetUrl = link.getAttribute('href'); // الحصول على الرابط
-
-                // إضافة تأثير الدوران
+                e.preventDefault();
+                const targetUrl = link.getAttribute('href');
                 link.style.transform = 'translateZ(20px) rotate(360deg)';
-
-                // تأخير فتح الرابط لمدة ثانية
                 setTimeout(() => {
-                    window.open(targetUrl, '_blank'); // فتح الرابط في نافذة جديدة
-                }, 1000); // تأخير 1000 مللي ثانية (1 ثانية)
+                    window.open(targetUrl, '_blank');
+                }, 1000);
             });
         });
 
