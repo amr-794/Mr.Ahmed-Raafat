@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>النسخة النهائية - البطاقة الأسطورية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --main-color: #7f00ff;
+            --secondary-color: #00ffff;
+            --accent: #ff00ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .nebula-bg {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(127, 0, 255, 0.1) 0%, 
+                rgba(0, 0, 0, 0.9) 70%);
+            animation: nebula-pulse 15s infinite alternate, nebula-rotate 30s infinite linear;
+        }
+
+        .card-container {
+            position: relative;
+            width: 280px;
+            height: 420px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: rgba(0, 0, 0, 0.95);
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 50px var(--main-color);
+        }
+
+        .holographic-overlay {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(45deg,
+                var(--main-color),
+                var(--secondary-color),
+                var(--accent));
+            opacity: 0.1;
+            animation: hologram-flow 6s infinite linear;
+            mix-blend-mode: overlay;
+        }
+
+        .quantum-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAKrVq36zwjjgzhhYWGMYAEYB8RmROaABADeOQ8CXl/xfgAAAABJRU5ErkJggg==');
+            animation: dots-move 20s infinite linear;
+        }
+
+        .content {
+            position: relative;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-top: 20px;
+            transform-style: preserve-3d;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: url('Mr_Ahmed_Raafat.png') center/cover; /* قم بتحديد مسار الصورة هنا */
+            filter: drop-shadow(0 0 20px var(--main-color));
+        }
+
+        .energy-aura {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 50%, 
+                var(--main-color) 0%, 
+                transparent 70%);
+            animation: aura-pulse 3s infinite;
+            filter: blur(20px);
+            opacity: 0.5;
+        }
+
+        .name {
+            color: #fff;
+            margin: 20px 0;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, 
+                var(--main-color), 
+                var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--main-color);
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-top: auto;
+        }
+
+        .social-link {
+            position: relative;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .social-link i {
+            color: white;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(45deg, 
+                var(--main-color), 
+                var(--secondary-color));
+            transform: translateZ(20px) rotate(360deg);
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        @keyframes hologram-flow {
+            0% { transform: rotate(0deg) translateX(-50%) translateY(-50%); }
+            100% { transform: rotate(360deg) translateX(50%) translateY(50%); }
+        }
+
+        @keyframes aura-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg) rotateY(5deg); }
+        }
+
+        @keyframes nebula-pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 0.4; }
+        }
+
+        @keyframes nebula-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes dots-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        @keyframes particle-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="nebula-bg"></div>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-face">
+                <div class="holographic-overlay"></div>
+                <div class="quantum-dots"></div>
+                <div class="content">
+                    <div class="profile-wrapper">
+                        <div class="energy-aura"></div>
+                        <div class="profile-image"></div>
+                    </div>
+                    <h1 class="name">اسمك هنا</h1>
+                    <div class="social-links">
+                        <!-- فيسبوك -->
+                        <a href="https://www.facebook.com/your-profile" target="_blank" class="social-link" id="facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <!-- يوتيوب -->
+                        <a href="https://www.youtube.com/your-channel" target="_blank" class="social-link" id="youtube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <!-- واتساب -->
+                        <a href="https://wa.me/your-phone-number" target="_blank" class="social-link" id="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <!-- جيميل -->
+                        <a href="mailto:your-email@gmail.com" target="_blank" class="social-link" id="gmail">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <!-- تيك توك -->
+                        <a href="https://www.tiktok.com/@your-username" target="_blank" class="social-link" id="tiktok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cardContainer = document.querySelector('.card-container');
+        const card = document.querySelector('.card');
+
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            
+            card.style.transform = `
+                rotateY(${xAxis}deg) 
+                rotateX(${yAxis}deg) 
+                translateZ(50px)
+            `;
+
+            cardContainer.style.transform = `
+                perspective(1000px)
+                rotateX(${yAxis * 0.5}deg)
+                rotateY(${xAxis * 0.5}deg)
+            `;
+        });
+
+        document.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            card.style.transform += ` translateZ(${scrollY * 0.1}px)`;
+        });
+
+        // إضافة تأخير عند النقر على الروابط
+        const socialLinks = document.querySelectorAll('.social-link');
+        socialLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // منع الانتقال المباشر إلى الرابط
+                const targetUrl = link.getAttribute('href'); // الحصول على الرابط
+
+                // إضافة تأثير الدوران
+                link.style.transform = 'translateZ(20px) rotate(360deg)';
+
+                // تأخير فتح الرابط لمدة ثانية
+                setTimeout(() => {
+                    window.open(targetUrl, '_blank'); // فتح الرابط في نافذة جديدة
+                }, 1000); // تأخير 1000 مللي ثانية (1 ثانية)
+            });
+        });
+
+        function createParticles() {
+            const particles = 50;
+            for (let i = 0; i < particles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 10 + 5}px;
+                    height: ${Math.random() * 10 + 5}px;
+                    background: radial-gradient(${i % 2 ? 'var(--main-color)' : 'var(--secondary-color)'}, transparent);
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: particle-float ${Math.random() * 10 + 5}s infinite;
+                    filter: blur(3px);
+                    opacity: 0.7;
+                `;
+                document.body.appendChild(particle);
+            }
+        }
+        createParticles();
+    </script>
+</body>
+</html>
