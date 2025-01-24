@@ -44,6 +44,8 @@
             height: 500px;
             transform-style: preserve-3d;
             perspective: 1000px;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .card {
@@ -54,6 +56,9 @@
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
             border-radius: 30px;
             overflow: hidden;
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
         .card-face {
@@ -64,7 +69,7 @@
             background: rgba(0, 0, 0, 0.95);
             border-radius: 30px;
             backdrop-filter: blur(15px);
-            box-shadow: 0 0 50px var(--main-color);
+            box-shadow: 0 0 20px var(--main-color);
         }
 
         .holographic-overlay {
@@ -105,6 +110,8 @@
             margin-top: 20px;
             transform-style: preserve-3d;
             animation: float 4s ease-in-out infinite;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .profile-image {
@@ -124,7 +131,7 @@
                 var(--main-color) 0%, 
                 transparent 70%);
             animation: aura-pulse 3s infinite;
-            filter: blur(20px);
+            filter: blur(10px);
             opacity: 0.5;
         }
 
@@ -163,6 +170,8 @@
             background: rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             transform-style: preserve-3d;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .social-link i {
@@ -258,22 +267,19 @@
             const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
             
-            card.style.transform = `
-                rotateY(${xAxis}deg) 
-                rotateX(${yAxis}deg) 
-                translateZ(50px)
-            `;
+            requestAnimationFrame(() => {
+                card.style.transform = `
+                    rotateY(${xAxis}deg) 
+                    rotateX(${yAxis}deg) 
+                    translateZ(50px)
+                `;
 
-            cardContainer.style.transform = `
-                perspective(1000px)
-                rotateX(${yAxis * 0.5}deg)
-                rotateY(${xAxis * 0.5}deg)
-            `;
-        });
-
-        document.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            card.style.transform += ` translateZ(${scrollY * 0.1}px)`;
+                cardContainer.style.transform = `
+                    perspective(1000px)
+                    rotateX(${yAxis * 0.5}deg)
+                    rotateY(${xAxis * 0.5}deg)
+                `;
+            });
         });
 
         const socialLinks = document.querySelectorAll('.social-link');
@@ -289,7 +295,7 @@
         });
 
         function createParticles() {
-            const particles = 50;
+            const particles = 30; // تم تقليل العدد من 50 إلى 30
             for (let i = 0; i < particles; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
